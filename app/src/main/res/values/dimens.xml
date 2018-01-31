@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Variable texts -->
+    <dimen name="marginFromSides">24dp</dimen>
+
+    <!-- Bars -->
+    <dimen name="largerBarsHeight">8dp</dimen>
+    <dimen name="smallBarsHeight">4dp</dimen>
+    <dimen name="largerBarsMarginTop">8dp</dimen> <!-- marginTop large bars-->
+    <dimen name="smallBarsMarginTop">10dp</dimen> <!-- marginTop small bars = (marginTop large bars) + (largerBarsHeight - smallBarsHeight)/2; 10 = 8 + (8-4)/2;  -->
+</resources>

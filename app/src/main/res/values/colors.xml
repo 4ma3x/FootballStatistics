@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app theme -->
+    <color name="colorPrimary">#333</color>      <!-- where the app title is -->
+    <color name="colorPrimaryDark">#000000</color>  <!-- where the clock and network are -->
+    <color name="colorAccent">#aaee00</color>       <!-- used for text inputs underline, etc -->
+
+    <!-- bars -->
+    <color name="smallBar">#cccccc</color>
+    <color name="largerBar">#aaee00</color>
+</resources>

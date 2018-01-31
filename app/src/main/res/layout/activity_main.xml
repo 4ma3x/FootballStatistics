@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.footballstatistics.MainActivity"
+    android:fillViewport="true">
+    <!-- fillViewport is IMPORTANT otherwise will not fill the whole screen -->
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/menu_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@color/largerBar"
+        android:paddingVertical="12dp"
+        >
+
+        <!-- Teams -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Team A"
+            android:layout_marginLeft="42dp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="Team B"
+            android:layout_marginRight="42dp"
+            android:textStyle="bold"
+            />
+
+    </RelativeLayout><!--EOF Teams -->
+
+    <!-- container for scores -->
+    <LinearLayout
+        android:id="@+id/scores_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/menu_view"
+        android:backgroundTintMode="multiply"
+        android:paddingVertical="24dp"
+        >
+
+
+        <!-- Score -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="8dp"
+            >
+
+            <!-- TextViews -->
+            <TextView
+                android:id="@+id/score_left_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/marginFromSides"
+                />
+
+            <TextView
+                android:id="@+id/score_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Score"
+                android:layout_centerHorizontal="true"
+                />
+
+            <TextView
+                android:id="@+id/score_right_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/marginFromSides"
+                />
+
+            <!-- Buttons -->
+            <Button
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_toLeftOf="@id/score_text_view"
+                android:text="+"
+                android:textSize="12sp"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="6dp"
+                android:onClick="scoreLeftButton"
+                />
+
+            <Button
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_toRightOf="@id/score_text_view"
+                android:text="+"
+                android:textSize="12sp"
+                android:layout_marginTop="-8dp"
+                android:layout_marginLeft="6dp"
+                android:onClick="scoreRightButton"
+                />
+
+            <!-- LeftBar -->
+            <View
+                android:id="@+id/score_bar_left"
+                android:layout_width="10dp"
+                android:layout_height="@dimen/largerBarsHeight"
+                android:background="@color/largerBar"
+                android:layout_below="@id/score_left_view"
+                android:layout_toLeftOf="@id/score_text_view"
+                android:layout_marginTop="@dimen/largerBarsMarginTop"
+                android:layout_marginRight="-12dp"
+                ></View>
+
+            <View
+                android:id="@+id/score_design_bar_left"
+                android:layout_width="150dp"
+                android:layout_height="@dimen/smallBarsHeight"
+                android:background="@color/smallBar"
+                android:layout_below="@id/score_left_view"
+                android:layout_toLeftOf="@id/score_bar_left"
+                android:layout_marginTop="@dimen/smallBarsMarginTop"
+                ></View>
+
+            <!-- RightBar -->
+            <View
+                android:id="@+id/score_bar_right"
+                android:layout_width="120dp"
+                android:layout_height="@dimen/largerBarsHeight"
+                android:background="@color/largerBar"
+                android:layout_below="@id/score_right_view"
+                android:layout_toRightOf="@id/score_text_view"
+                android:layout_marginTop="@dimen/largerBarsMarginTop"
+                android:layout_marginLeft="-12dp"
+                ></View>
+
+            <View
+                android:id="@+id/score_design_bar_right"
+                android:layout_width="40dp"
+                android:layout_height="@dimen/smallBarsHeight"
+                android:background="@color/smallBar"
+                android:layout_below="@id/score_left_view"
+                android:layout_toRightOf="@id/score_bar_right"
+                android:layout_marginTop="@dimen/smallBarsMarginTop"
+                ></View>
+
+        </RelativeLayout><!-- EOF Score -->
+
+
+        <!-- Total Shots -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="8dp"
+            >
+
+            <!-- TextViews -->
+            <TextView
+                android:id="@+id/tshots_left_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/marginFromSides"
+                />
+
+            <TextView
+                android:id="@+id/tshots_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Shots"
+                android:layout_centerHorizontal="true"
+                />
+
+            <TextView
+                android:id="@+id/tshots_right_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/marginFromSides"
+                />
+
+            <!-- Buttons -->
+            <Button
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_toLeftOf="@id/tshots_text_view"
+                android:text="+"
+                android:textSize="12sp"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="6dp"
+                android:onClick="tShotsLeftButton"
+                />
+
+            <Button
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_toRightOf="@id/tshots_text_view"
+                android:text="+"
+                android:textSize="12sp"
+                android:layout_marginTop="-8dp"
+                android:layout_marginLeft="6dp"
+                android:onClick="tShotsRightButton"
+                />
+
+            <!-- LeftBar -->
+            <View
+                android:id="@+id/tshot_bar_left"
+                android:layout_width="60dp"
+                android:layout_height="@dimen/largerBarsHeight"
+                android:background="@color/largerBar"
+                android:layout_below="@id/tshots_left_view"
+                android:layout_toLeftOf="@id/tshots_text_view"
+                android:layout_marginTop="@dimen/largerBarsMarginTop"
+                android:layout_marginRight="-29dp"
+                ></View>
+
+            <View
+                android:id="@+id/tshots_design_bar_left"
+                android:layout_width="100dp"
+                android:layout_height="@dimen/smallBarsHeight"
+                android:background="@color/smallBar"
+                android:layout_below="@id/tshots_left_view"
+                android:layout_toLeftOf="@id/tshot_bar_left"
+                android:layout_marginTop="@dimen/smallBarsMarginTop"
+                ></View>
+
+            <!-- RightBar -->
+            <View
+                android:id="@+id/tshot_bar_right"
+                android:layout_width="120dp"
+                android:layout_height="@dimen/largerBarsHeight"
+                android:background="@color/largerBar"
+                android:layout_below="@id/tshots_right_view"
+                android:layout_toRightOf="@id/tshots_text_view"
+                android:layout_marginTop="@dimen/largerBarsMarginTop"
+                android:layout_marginLeft="-29dp"
+                ></View>
+
+            <View
+                android:id="@+id/tshots_design_bar_right"
+                android:layout_width="40dp"
+                android:layout_height="@dimen/smallBarsHeight"
+                android:background="@color/smallBar"
+                android:layout_below="@id/tshots_right_view"
+                android:layout_toRightOf="@id/tshot_bar_right"
+                android:layout_marginTop="@dimen/smallBarsMarginTop"
+                ></View>
+
+        </RelativeLayout><!-- EOF Total Shots -->
+
+        <!-- Shots on Target -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="8dp"
+            >
+
+            <!-- TextViews -->
+            <TextView
+                android:id="@+id/targetshots_left_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/marginFromSides"
+                />
+
+            <TextView
+                android:id="@+id/targetshots_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shots on target"
+                android:layout_centerHorizontal="true"
+                />
+
+            <TextView
+                android:id="@+id/targetshots_right_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/marginFromSides"
+                />
+
+            <!-- Buttons -->
+            <Button
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_toLeftOf="@id/targetshots_text_view"
+                android:text="+"
+                android:textSize="12sp"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="6dp"
+                android:onClick="targetShotsLeftButton"
+                />
+
+            <Button
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_toRightOf="@id/targetshots_text_view"
+                android:text="+"
+                android:textSize="12sp"
+                android:layout_marginTop="-8dp"
+                android:layout_marginLeft="6dp"
+                android:onClick="targetShotsRightButton"
+                />
+
+            <!-- LeftBar -->
+            <View
+                android:id="@+id/targetshot_bar_left"
+                android:layout_width="60dp"
+                android:layout_height="@dimen/largerBarsHeight"
+                android:background="@color/largerBar"
+                android:layout_below="@id/targetshots_left_view"
+                android:layout_toLeftOf="@id/targetshots_text_view"
+                android:layout_marginTop="@dimen/largerBarsMarginTop"
+                android:layout_marginRight="-41dp"
+                ></View>
+
+            <View
+                android:id="@+id/targetshots_design_bar_left"
+                android:layout_width="100dp"
+                android:layout_height="@dimen/smallBarsHeight"
+                android:background="@color/smallBar"
+                android:layout_below="@id/targetshots_left_view"
+                android:layout_toLeftOf="@id/targetshot_bar_left"
+                android:layout_marginTop="@dimen/smallBarsMarginTop"
+                ></View>
+
+            <!-- RightBar -->
+            <View
+                android:id="@+id/targetshot_bar_right"
+                android:layout_width="120dp"
+                android:layout_height="@dimen/largerBarsHeight"
+                android:background="@color/largerBar"
+                android:layout_below="@id/targetshots_right_view"
+                android:layout_toRightOf="@id/targetshots_text_view"
+                android:layout_marginTop="@dimen/largerBarsMarginTop"
+                android:layout_marginLeft="-41dp"
+                ></View>
+
+            <View
+                android:id="@+id/targetshots_design_bar_right"
+                android:layout_width="40dp"
+                android:layout_height="@dimen/smallBarsHeight"
+                android:background="@color/smallBar"
+                android:layout_below="@id/targetshots_right_view"
+                android:layout_toRightOf="@id/targetshot_bar_right"
+                android:layout_marginTop="@dimen/smallBarsMarginTop"
+                ></View>
+
+        </RelativeLayout><!-- EOF Shots on Target -->
+
+
+        <!-- Possession -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="8dp"
+            >
+
+            <!-- TextViews -->
+            <TextView
+                android:id="@+id/possession_left_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50%"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/marginFromSides"
+                />
+
+            <TextView
+                android:id="@+id/possession_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Possession %"
+                android:layout_centerHorizontal="true"
+                />
+
+            <TextView
+                android:id="@+id/possession_right_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50%"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/marginFromSides"
+                />
+
+            <!-- Buttons -->
+            <Button
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_toLeftOf="@id/possession_text_view"
+                android:text="+"
+                android:textSize="12sp"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="6dp"
+                android:onClick="possessionLeftButton"
+                />
+
+            <Button
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_toRightOf="@id/possession_text_view"
+                android:text="+"
+                android:textSize="12sp"
+                android:layout_marginTop="-8dp"
+                android:layout_marginLeft="6dp"
+                android:onClick="possessionRightButton"
+                />
+
+            <!-- LeftBar -->
+            <View
+                android:id="@+id/possession_bar_left"
+                android:layout_width="60dp"
+                android:layout_height="@dimen/largerBarsHeight"
+                android:background="@color/largerBar"
+                android:layout_below="@id/possession_left_view"
+                android:layout_toLeftOf="@id/possession_text_view"
+                android:layout_marginTop="@dimen/largerBarsMarginTop"
+                android:layout_marginRight="-35dp"
+                ></View>
+
+            <View
+                android:id="@+id/possession_design_bar_left"
+                android:layout_width="100dp"
+                android:layout_height="@dimen/smallBarsHeight"
+                android:background="@color/smallBar"
+                android:layout_below="@id/possession_left_view"
+                android:layout_toLeftOf="@id/possession_bar_left"
+                android:layout_marginTop="@dimen/smallBarsMarginTop"
+                ></View>
+
+            <!-- RightBar -->
+            <View
+                android:id="@+id/possession_bar_right"
+                android:layout_width="120dp"
+                android:layout_height="@dimen/largerBarsHeight"
+                android:background="@color/largerBar"
+                android:layout_below="@id/possession_right_view"
+                android:layout_toRightOf="@id/possession_text_view"
+                android:layout_marginTop="@dimen/largerBarsMarginTop"
+                android:layout_marginLeft="-35dp"
+                ></View>
+
+            <View
+                android:id="@+id/possession_design_bar_right"
+                android:layout_width="40dp"
+                android:layout_height="@dimen/smallBarsHeight"
+                android:background="@color/smallBar"
+                android:layout_below="@id/possession_right_view"
+                android:layout_toRightOf="@id/possession_bar_right"
+                android:layout_marginTop="@dimen/smallBarsMarginTop"
+                ></View>
+
+        </RelativeLayout><!-- EOF Possession -->
+
+
+        <!-- Yellow cards -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="8dp"
+            >
+
+            <!-- TextViews -->
+            <TextView
+                android:id="@+id/ycards_left_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/marginFromSides"
+                />
+
+            <TextView
+                android:id="@+id/ycards_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yellow cards"
+                android:layout_centerHorizontal="true"
+                />
+
+            <TextView
+                android:id="@+id/ycards_right_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/marginFromSides"
+                />
+
+            <!-- Buttons -->
+            <Button
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_toLeftOf="@id/ycards_text_view"
+                android:text="+"
+                android:textSize="12sp"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="6dp"
+                android:onClick="ycardsLeftButton"
+                />
+
+            <Button
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_toRightOf="@id/ycards_text_view"
+                android:text="+"
+                android:textSize="12sp"
+                android:layout_marginTop="-8dp"
+                android:layout_marginLeft="6dp"
+                android:onClick="ycardsRightButton"
+                />
+
+            <!-- LeftBar -->
+            <View
+                android:id="@+id/ycards_bar_left"
+                android:layout_width="60dp"
+                android:layout_height="@dimen/largerBarsHeight"
+                android:background="@color/largerBar"
+                android:layout_below="@id/ycards_left_view"
+                android:layout_toLeftOf="@id/ycards_text_view"
+                android:layout_marginTop="@dimen/largerBarsMarginTop"
+                android:layout_marginRight="-34dp"
+                ></View>
+
+            <View
+                android:id="@+id/ycards_design_bar_left"
+                android:layout_width="100dp"
+                android:layout_height="@dimen/smallBarsHeight"
+                android:background="@color/smallBar"
+                android:layout_below="@id/ycards_left_view"
+                android:layout_toLeftOf="@id/ycards_bar_left"
+                android:layout_marginTop="@dimen/smallBarsMarginTop"
+                ></View>
+
+            <!-- RightBar -->
+            <View
+                android:id="@+id/ycards_bar_right"
+                android:layout_width="120dp"
+                android:layout_height="@dimen/largerBarsHeight"
+                android:background="@color/largerBar"
+                android:layout_below="@id/ycards_right_view"
+                android:layout_toRightOf="@id/ycards_text_view"
+                android:layout_marginTop="@dimen/largerBarsMarginTop"
+                android:layout_marginLeft="-34dp"
+                ></View>
+
+            <View
+                android:id="@+id/ycards_design_bar_right"
+                android:layout_width="40dp"
+                android:layout_height="@dimen/smallBarsHeight"
+                android:background="@color/smallBar"
+                android:layout_below="@id/ycards_right_view"
+                android:layout_toRightOf="@id/ycards_bar_right"
+                android:layout_marginTop="@dimen/smallBarsMarginTop"
+                ></View>
+
+        </RelativeLayout><!-- EOF Yellow cards -->
+
+
+        <!-- Red cards -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="8dp"
+            >
+
+            <!-- TextViews -->
+            <TextView
+                android:id="@+id/rcards_left_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/marginFromSides"
+                />
+
+            <TextView
+                android:id="@+id/rcards_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Red cards"
+                android:layout_centerHorizontal="true"
+                />
+
+            <TextView
+                android:id="@+id/rcards_right_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/marginFromSides"
+                />
+
+            <!-- Buttons -->
+            <Button
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_toLeftOf="@id/rcards_text_view"
+                android:text="+"
+                android:textSize="12sp"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="6dp"
+                android:onClick="rcardsLeftButton"
+                />
+
+            <Button
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_toRightOf="@id/rcards_text_view"
+                android:text="+"
+                android:textSize="12sp"
+                android:layout_marginTop="-8dp"
+                android:layout_marginLeft="6dp"
+                android:onClick="rcardsRightButton"
+                />
+
+            <!-- LeftBar -->
+            <View
+                android:id="@+id/rcards_bar_left"
+                android:layout_width="60dp"
+                android:layout_height="@dimen/largerBarsHeight"
+                android:background="@color/largerBar"
+                android:layout_below="@id/rcards_left_view"
+                android:layout_toLeftOf="@id/rcards_text_view"
+                android:layout_marginTop="@dimen/largerBarsMarginTop"
+                android:layout_marginRight="-26dp"
+                ></View>
+
+            <View
+                android:id="@+id/rcards_design_bar_left"
+                android:layout_width="100dp"
+                android:layout_height="@dimen/smallBarsHeight"
+                android:background="@color/smallBar"
+                android:layout_below="@id/rcards_left_view"
+                android:layout_toLeftOf="@id/rcards_bar_left"
+                android:layout_marginTop="@dimen/smallBarsMarginTop"
+                ></View>
+
+            <!-- RightBar -->
+            <View
+                android:id="@+id/rcards_bar_right"
+                android:layout_width="120dp"
+                android:layout_height="@dimen/largerBarsHeight"
+                android:background="@color/largerBar"
+                android:layout_below="@id/rcards_right_view"
+                android:layout_toRightOf="@id/rcards_text_view"
+                android:layout_marginTop="@dimen/largerBarsMarginTop"
+                android:layout_marginLeft="-26dp"
+                ></View>
+
+            <View
+                android:id="@+id/rcards_design_bar_right"
+                android:layout_width="40dp"
+                android:layout_height="@dimen/smallBarsHeight"
+                android:background="@color/smallBar"
+                android:layout_below="@id/rcards_right_view"
+                android:layout_toRightOf="@id/rcards_bar_right"
+                android:layout_marginTop="@dimen/smallBarsMarginTop"
+                ></View>
+
+        </RelativeLayout><!-- EOF Yellow cards -->
+
+
+    </LinearLayout><!--EOF Scores -->
+
+    <!-- Footer -->
+    <LinearLayout
+        android:id="@+id/footer_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/largerBar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_horizontal"
+        android:paddingVertical="20dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset"
+            android:textStyle="bold"
+            android:paddingHorizontal="16dp"
+            android:background="@color/smallBar"
+            android:layout_marginHorizontal="8dp"
+            android:padding="4dp"
+            android:onClick="resetButton"
+            />
+
+    </LinearLayout><!-- EOF Footer -->
+
+</RelativeLayout>
+
+</ScrollView>
